@@ -229,12 +229,12 @@ const App = () => {
                             <div style={{
                               position: 'absolute',
                               left: `${((min - extendedMin) / (extendedMax - extendedMin)) * 100}%`,
-                              width: `${((max - min) / (extendedMax - min)) * 100}%`,
+                              width: `${((max - min) / (extendedMax - extendedMin)) * 100}%`,
                               height: '100%',
                               backgroundColor: 'rgba(0,128,0,0.3)'
                             }} />
                           </div>
-                          <span>{extendedMax.toFixed(2)}</span>
+                          <span>{max.toFixed(2)}</span>
                         </div>
                       </td>
                     </tr>
@@ -282,12 +282,12 @@ const App = () => {
         </div>
         {/* Правая колонка – шкалы */}
         <div style={{ width: '50%' }}>
-          <h2 style={{ textAlign: 'center' }}>Шкалы</h2>
-          {group.fields.map(index => {
-            const { min, max } = minMaxValuesData[index];
-            const extendedMin = min - (max - min) * 0.5;
-            const extendedMax = max + (max - min) * 0.5;
-            const position = calculatePosition(index);
+        <h2 style={{ textAlign: 'center' }}>Шкалы</h2>
+        {group.fields.map(index => {
+          const { min, max } = minMaxValuesData[index];
+          const extendedMin = min - (max - min) * 0.5;
+          const extendedMax = max + (max - min) * 0.5; // Исправлено с 0.55 на 0.5
+          const position = calculatePosition(index);
             return (
               <div key={index} style={{ marginBottom: '20px', textAlign: 'center' }}>
                 <div style={{ marginBottom: '5px' }}>{formNamesData[index]}</div>
@@ -311,12 +311,12 @@ const App = () => {
                     <div style={{
                       position: 'absolute',
                       left: `${((min - extendedMin) / (extendedMax - extendedMin)) * 100}%`,
-                      width: `${((max - min) / (extendedMax - min)) * 100}%`,
+                      width: `${((max - min) / (extendedMax - extendedMin)) * 100}%`,
                       height: '100%',
                       backgroundColor: 'rgba(0,128,0,0.3)'
                     }} />
                   </div>
-                  <span>{extendedMax.toFixed(2)}</span>
+                  <span>{max.toFixed(2)}</span>
                 </div>
                 <div>Значение: {formValues[index]}</div>
               </div>
